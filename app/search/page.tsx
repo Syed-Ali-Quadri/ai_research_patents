@@ -370,7 +370,9 @@ const Page = () => {
                 name: 'Market Adoption',
                 type: 'line',
                 yAxisIndex: 1,
-                data: data?.graphs.innovation_usage.y.map(v => v * 0.85) || [],
+                data: (Array.isArray(data?.graphs.innovation_usage.y) && typeof data.graphs.innovation_usage.y[0] === 'number' 
+                    ? (data.graphs.innovation_usage.y as number[]).map(v => v * 0.85) 
+                    : []) || [],
                 lineStyle: {
                     width: 2.5,
                     color: '#F59E0B'
