@@ -150,7 +150,7 @@ const Page = () => {
             text: 'S-Curve Analysis',
             left: 'center',
             textStyle: {
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: 'bold'
             }
         },
@@ -161,9 +161,10 @@ const Page = () => {
             }
         },
         grid: {
-            left: '3%',
+            left: '8%',
             right: '4%',
-            bottom: '3%',
+            bottom: '8%',
+            top: '15%',
             containLabel: true
         },
         xAxis: {
@@ -172,13 +173,13 @@ const Page = () => {
             boundaryGap: false,
             name: 'Year',
             nameLocation: 'middle',
-            nameGap: 30
+            nameGap: 25
         },
         yAxis: {
             type: 'value',
             name: 'Patent Count',
             nameLocation: 'middle',
-            nameGap: 50
+            nameGap: 40
         },
         series: [
             {
@@ -216,7 +217,7 @@ const Page = () => {
             text: 'Technology Hype Cycle',
             left: 'center',
             textStyle: {
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: 'bold'
             }
         },
@@ -228,13 +229,17 @@ const Page = () => {
         },
         legend: {
             data: data?.graphs.hype_curve.series.map(s => s.name) || [],
-            bottom: 10,
-            type: 'scroll'
+            bottom: 5,
+            type: 'scroll',
+            textStyle: {
+                fontSize: 10
+            }
         },
         grid: {
-            left: '3%',
+            left: '8%',
             right: '4%',
-            bottom: '15%',
+            bottom: '20%',
+            top: '15%',
             containLabel: true
         },
         xAxis: {
@@ -243,13 +248,13 @@ const Page = () => {
             boundaryGap: false,
             name: 'Year',
             nameLocation: 'middle',
-            nameGap: 30
+            nameGap: 25
         },
         yAxis: {
             type: 'value',
             name: 'Patent Volume',
             nameLocation: 'middle',
-            nameGap: 50
+            nameGap: 40
         },
         series: data?.graphs.hype_curve.series.map((series, index) => ({
             name: series.name,
@@ -257,7 +262,7 @@ const Page = () => {
             smooth: true,
             data: series.data,
             lineStyle: {
-                width: 3,
+                width: 2.5,
                 color: [
                     '#4F46E5',
                     '#10B981',
@@ -276,7 +281,7 @@ const Page = () => {
                 ][index % 5]
             },
             symbol: 'circle',
-            symbolSize: 6,
+            symbolSize: 5,
             emphasis: {
                 focus: 'series',
                 scale: true
@@ -290,7 +295,7 @@ const Page = () => {
             text: 'Innovation Usage & Adoption',
             left: 'center',
             textStyle: {
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: 'bold'
             }
         },
@@ -305,12 +310,16 @@ const Page = () => {
         },
         legend: {
             data: ['Patent Filings', 'Market Adoption'],
-            bottom: 10
+            bottom: 5,
+            textStyle: {
+                fontSize: 11
+            }
         },
         grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '15%',
+            left: '8%',
+            right: '8%',
+            bottom: '20%',
+            top: '15%',
             containLabel: true
         },
         xAxis: {
@@ -320,7 +329,8 @@ const Page = () => {
                 type: 'shadow'
             },
             axisLabel: {
-                rotate: 45
+                rotate: 45,
+                fontSize: 10
             }
         },
         yAxis: [
@@ -328,7 +338,7 @@ const Page = () => {
                 type: 'value',
                 name: 'Patent Filings',
                 nameLocation: 'middle',
-                nameGap: 50,
+                nameGap: 40,
                 axisLabel: {
                     formatter: '{value}'
                 }
@@ -337,7 +347,7 @@ const Page = () => {
                 type: 'value',
                 name: 'Adoption Rate',
                 nameLocation: 'middle',
-                nameGap: 50,
+                nameGap: 40,
                 axisLabel: {
                     formatter: '{value}'
                 }
@@ -362,7 +372,7 @@ const Page = () => {
                 yAxisIndex: 1,
                 data: data?.graphs.innovation_usage.y.map(v => v * 0.85) || [],
                 lineStyle: {
-                    width: 3,
+                    width: 2.5,
                     color: '#F59E0B'
                 },
                 itemStyle: {
@@ -382,7 +392,7 @@ const Page = () => {
             text: 'Technology Convergence Detection',
             left: 'center',
             textStyle: {
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: 'bold'
             }
         },
@@ -398,8 +408,9 @@ const Page = () => {
         },
         grid: {
             left: '3%',
-            right: '4%',
-            bottom: '3%',
+            right: '8%',
+            bottom: '5%',
+            top: '15%',
             containLabel: true
         },
         xAxis: {
@@ -407,13 +418,13 @@ const Page = () => {
             max: 100,
             name: 'Convergence Score (%)',
             nameLocation: 'middle',
-            nameGap: 30
+            nameGap: 25
         },
         yAxis: {
             type: 'category',
             data: data?.graphs.technology_convergence.technologies || [],
             axisLabel: {
-                fontSize: 12,
+                fontSize: 11,
                 interval: 0
             }
         },
@@ -432,7 +443,7 @@ const Page = () => {
                     show: true,
                     position: 'right',
                     formatter: '{c}%',
-                    fontSize: 12
+                    fontSize: 11
                 },
                 emphasis: {
                     focus: 'series',
@@ -499,7 +510,6 @@ const Page = () => {
                         </div>
                     </form>
 
-
                     <p className="mt-3 text-sm text-gray-600">
                         Current query: <span className="font-semibold text-indigo-600">&quot;{query}&quot;</span>
                     </p>
@@ -522,65 +532,65 @@ const Page = () => {
                     <p className="text-gray-700 leading-relaxed">{data?.summary}</p>
                 </div>
 
-                {/* Charts Grid */}
-                <div className="grid grid-cols-1 gap-8 mb-8">
+                {/* Charts Grid - 2 columns */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                     {/* S-Curve Chart */}
-                    <div className="bg-white rounded-lg shadow-md p-6">
-                        <div className="flex items-center mb-4">
+                    <div className="bg-white rounded-lg shadow-md p-4">
+                        <div className="flex items-center mb-3">
                             <TrendingUp className="w-5 h-5 text-indigo-600 mr-2" />
-                            <h3 className="text-lg font-semibold text-gray-900">S-Curve Analysis</h3>
+                            <h3 className="text-base font-semibold text-gray-900">S-Curve Analysis</h3>
                         </div>
-                        <ReactECharts option={sCurveOptions} style={{ height: '400px' }} />
-                        <p className="mt-4 text-sm text-gray-600 bg-gray-50 p-4 rounded-lg">
+                        <ReactECharts option={sCurveOptions} style={{ height: '350px' }} />
+                        <p className="mt-3 text-xs text-gray-600 bg-gray-50 p-3 rounded-lg">
                             {data?.graphs.s_curve.description}
                         </p>
                     </div>
 
                     {/* Hype Curve Chart */}
-                    <div className="bg-white rounded-lg shadow-md p-6">
-                        <div className="flex items-center mb-4">
+                    <div className="bg-white rounded-lg shadow-md p-4">
+                        <div className="flex items-center mb-3">
                             <BarChart3 className="w-5 h-5 text-green-600 mr-2" />
-                            <h3 className="text-lg font-semibold text-gray-900">Technology Hype Cycle</h3>
+                            <h3 className="text-base font-semibold text-gray-900">Technology Hype Cycle</h3>
                         </div>
-                        <ReactECharts option={hypeCurveOptions} style={{ height: '450px' }} />
-                        <p className="mt-4 text-sm text-gray-600 bg-gray-50 p-4 rounded-lg">
+                        <ReactECharts option={hypeCurveOptions} style={{ height: '350px' }} />
+                        <p className="mt-3 text-xs text-gray-600 bg-gray-50 p-3 rounded-lg">
                             {data?.graphs.hype_curve.description}
                         </p>
                     </div>
 
                     {/* Innovation Usage Chart */}
-                    <div className="bg-white rounded-lg shadow-md p-6">
-                        <div className="flex items-center mb-4">
+                    <div className="bg-white rounded-lg shadow-md p-4">
+                        <div className="flex items-center mb-3">
                             <Activity className="w-5 h-5 text-purple-600 mr-2" />
-                            <h3 className="text-lg font-semibold text-gray-900">Innovation Usage & Adoption</h3>
+                            <h3 className="text-base font-semibold text-gray-900">Innovation Usage & Adoption</h3>
                         </div>
-                        <ReactECharts option={innovationUsageOptions} style={{ height: '400px' }} />
-                        <p className="mt-4 text-sm text-gray-600 bg-gray-50 p-4 rounded-lg">
+                        <ReactECharts option={innovationUsageOptions} style={{ height: '350px' }} />
+                        <p className="mt-3 text-xs text-gray-600 bg-gray-50 p-3 rounded-lg">
                             {data?.graphs.innovation_usage.description}
                         </p>
                     </div>
 
                     {/* Technology Convergence Chart */}
-                    <div className="bg-white rounded-lg shadow-md p-6">
-                        <div className="flex items-center mb-4">
+                    <div className="bg-white rounded-lg shadow-md p-4">
+                        <div className="flex items-center mb-3">
                             <GitMerge className="w-5 h-5 text-cyan-600 mr-2" />
-                            <h3 className="text-lg font-semibold text-gray-900">Technology Convergence Detection</h3>
+                            <h3 className="text-base font-semibold text-gray-900">Technology Convergence Detection</h3>
                         </div>
-                        <ReactECharts option={technologyConvergenceOptions} style={{ height: '400px' }} />
-                        <p className="mt-4 text-sm text-gray-600 bg-gray-50 p-4 rounded-lg">
+                        <ReactECharts option={technologyConvergenceOptions} style={{ height: '350px' }} />
+                        <p className="mt-3 text-xs text-gray-600 bg-gray-50 p-3 rounded-lg">
                             {data?.graphs.technology_convergence.description}
                         </p>
-                        <div className="mt-4 flex items-center gap-4 text-xs">
-                            <div className="flex items-center gap-2">
-                                <div className="w-4 h-4 bg-green-500 rounded"></div>
+                        <div className="mt-3 flex items-center gap-3 text-xs">
+                            <div className="flex items-center gap-1">
+                                <div className="w-3 h-3 bg-green-500 rounded"></div>
                                 <span className="text-gray-600">High (≥85%)</span>
                             </div>
-                            <div className="flex items-center gap-2">
-                                <div className="w-4 h-4 bg-yellow-500 rounded"></div>
+                            <div className="flex items-center gap-1">
+                                <div className="w-3 h-3 bg-yellow-500 rounded"></div>
                                 <span className="text-gray-600">Medium (70-84%)</span>
                             </div>
-                            <div className="flex items-center gap-2">
-                                <div className="w-4 h-4 bg-red-500 rounded"></div>
+                            <div className="flex items-center gap-1">
+                                <div className="w-3 h-3 bg-red-500 rounded"></div>
                                 <span className="text-gray-600">Low (&lt;70%)</span>
                             </div>
                         </div>
