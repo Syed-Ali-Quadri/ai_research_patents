@@ -1,7 +1,7 @@
 "use client"
 
 import { useSearchParams, useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 import ReactECharts from 'echarts-for-react'
 import { Loader2, TrendingUp, BarChart3, Activity, GitMerge, Search } from 'lucide-react'
 
@@ -40,7 +40,7 @@ interface SearchResponse {
     };
 }
 
-const Page = () => {
+const SearchContent = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const query = searchParams.get('q');
@@ -636,6 +636,21 @@ const Page = () => {
                 </div>
             </div>
         </div>
+    );
+};
+
+const Page = () => {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center bg-gray-50">
+                <div className="text-center">
+                    <Loader2 className="w-12 h-12 animate-spin text-indigo-600 mx-auto mb-4" />
+                    <p className="text-gray-600 text-lg">Loading search...</p>
+                </div>
+            </div>
+        }>
+            <SearchContent />
+        </Suspense>
     );
 };
 
