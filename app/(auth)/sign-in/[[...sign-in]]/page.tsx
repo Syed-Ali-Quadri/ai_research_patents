@@ -7,7 +7,7 @@ import { useSignIn } from '@clerk/nextjs';
 
 export default function SignInPage() {
     const router = useRouter();
-    const {isLoaded, setActive, signIn} = useSignIn();
+    const { isLoaded, setActive, signIn } = useSignIn();
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -20,23 +20,36 @@ export default function SignInPage() {
         setError('');
         setLoading(true);
 
+        if (!isLoaded) {
+            setError('Sign-in component is not loaded yet. Please try again.');
+            setLoading(false);
+            return;
+        }
         // Add your signin logic here
         try {
-            await signIn?.create({
+            const response = await signIn.create({
                 identifier: formData.email,
                 password: formData.password,
-            })
-            const sessionid = signIn?.createdSessionId;
+            });
 
-            if (sessionid && setActive) {
-                await setActive({ session: sessionid });
+            if (response.status === "complete") {
+                await setActive({ session: response.createdSessionId });
+                router.push('/');
+                return;
             }
-            router.push('/');
-        } catch (err) {
-            setError('Invalid email or password. Please try again.');
-        } finally {
-            setLoading(false);
+
+            // handle other auth states
+            if (response.status === "needs_first_factor") {
+                setError("Additional authentication required.");
+                return;
+            }
+
+            console.log("Unhandled Clerk sign-in state", response);
+
+        } catch (err: any) {
+            setError(err.errors?.[0]?.message || "Invalid email or password.");
         }
+
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
